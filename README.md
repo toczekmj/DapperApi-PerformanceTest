@@ -13,7 +13,8 @@ Project contains:
 Disclaimer: This is not a real world scenario, it's just a simple test to measure performance of different approaches.
 System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 
-### What is being measured?
+### What is being measured? 
+#### How much faster are other approaches compared to baseline
 -  Baseline - simple query in loop
     - Every query is being executed and awaited in loop
     - This is the baseline for other tests
@@ -55,6 +56,11 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 - WhenAllAsync: -28.77% (slower than baseline)
 - Parallel: 45.91%
 - ParallelAsync: 38.01%
+
+#### Overall Percentage Improvements (for all sets combined):
+- WhenAllAsync: -26.32% (slower than baseline)
+- Parallel: 47.65%
+- ParallelAsync: 40.76%
 
 ### Average of 10 cycles per test:
 
