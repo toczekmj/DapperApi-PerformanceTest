@@ -63,4 +63,35 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 - ParallelAsync: 40.76%
 
 ### Average of 10 cycles per test:
+## Naive Benchmark Results (1k, 10k, 100k, 1M, 10M, Average)
+
+| Test Case                       | 1k   | 10k   | 100k   | 1M      | 10M      | Average   |
+|---------------------------------|------|-------|--------|---------|----------|-----------|
+| **BenchmarkCardsAwaitedAsync**  | 22ms | 112ms | 1250ms | 16435ms | 149898ms | 33543.4ms |
+| **BenchmarkCardsWhenAllAsync**  | 48ms | 110ms | 1252ms | 17508ms | 148991ms | 33581.8ms |
+| **BenchmarkCardsParallel**      | 8ms  | 56ms  | 668ms  | 9373ms  | 68367ms  | 15694.4ms |
+| **BenchmarkCardsParallelAsync** | 4ms  | 39ms  | 480ms  | 8511ms  | 71174ms  | 16041.6ms |
+
+
+#### Average results:
+- BenchmarkCardsAwaitedAsync: 33543,4ms
+- BenchmarkCardsWhenAllAsync: 33581,8ms
+- BenchmarkCardsParallel: 15694,4ms
+- BenchmarkCardsParallelAsync: 16041,6ms
+
+## Conclusion
+| Benchmark                   | Performance Difference from Baseline |
+|-----------------------------|--------------------------------------|
+| BenchmarkCardsWhenAllAsync  | 0.11% slower                         |
+| BenchmarkCardsParallel      | 53.21% faster                        |
+| BenchmarkCardsParallelAsync | 52.18% faster                        |
+
+
+- BenchmarkCardsWhenAllAsync is 0.11% slower than the baseline (BenchmarkCardsAwaitedAsync).
+- BenchmarkCardsParallel is 53.21% faster than the baseline.
+- BenchmarkCardsParallelAsync is 52.18% faster than the baseline
+
+
+
+Are those results trustworthy? Maybe, or maybe not. But I'd take them into consideration while working with real data.
 
