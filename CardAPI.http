@@ -1,0 +1,27 @@
+POST {{URL}}/Db/rebuild/2/3
+Accept: application/json
+###
+
+GET {{URL}}/Card/
+Accept: application/json
+###
+
+GET {{URL}}/Card/1
+Accept: application/json
+###
+
+GET {{URL}}/Card/from-project/1
+Accept: application/json
+###
+
+GET {{URL}}/Project/
+Accept: application/json
+###
+
+GET {{URL}}/Project/1
+Accept: application/json
+###
+
+GET {{URL}}/Project/WithCards
+Accept: application/json
+###
