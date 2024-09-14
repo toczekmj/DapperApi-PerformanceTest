@@ -61,3 +61,4 @@ public interface ICardRepository
     Task<ResultifyHandler<CardModel>> GetCardAsync(string id, CancellationToken ct);
     Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> GetCardsByProjectIdAsync(string projectId, CancellationToken ct);
 }
+

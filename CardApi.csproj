@@ -11,14 +11,39 @@
         <PackageReference Include="Dapper" Version="2.1.35" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0-preview.5.24306.11"/>
         <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.0-rc.1.24451.1" />
-        <PackageReference Include="NSwag.AspNetCore" Version="14.1.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.7.3" />
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Remove="CardApi.Benchmarks\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="CardApi.Benchmarks\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="CardApi.Benchmarks\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="CardApi.Benchmarks\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="CardApi.Benchmarks\bin\Debug\net9.0\CardApi.Benchmarks.deps.json" />
+      <_ContentIncludedByDefault Remove="CardApi.Benchmarks\bin\Debug\net9.0\CardApi.Benchmarks.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="CardApi.Benchmarks\obj\CardApi.Benchmarks.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="CardApi.Benchmarks\obj\Debug\net9.0\CardApi.Benchmarks.sourcelink.json" />
+      <_ContentIncludedByDefault Remove="CardApi.Benchmarks\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="CardApi.Benchmarks\obj\project.packagespec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Reference Include="Resultify">
-        <HintPath>..\..\ResultifyPublisher\Resultify.dll</HintPath>
+        <HintPath>Resultify.dll</HintPath>
       </Reference>
     </ItemGroup>
+    
 
 </Project>

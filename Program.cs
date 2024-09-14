@@ -1,3 +1,4 @@
+using CardApi.Benchmarks;
 using CardApi.DbConnections;
 using CardApi.Services;
 
@@ -12,6 +13,7 @@ builder.Services.AddSingleton(new SqliteDbConnectionFactory(connectionString));
 builder.Services.AddTransient<ICardRepository, CardRepository>();
 builder.Services.AddTransient<IDbOperationRepository, DbOperationsRepository>();
 builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
+builder.Services.AddTransient<IBenchmarkRepository, BenchmarkRepository>();
 
 var app = builder.Build();
 
