@@ -54,6 +54,4 @@ public class CardController : ControllerBase
             ? StatusCode((int)result.StatusCode!, result.ErrorMessage) 
             : Ok(result);
     }
-    
-    
 }
