@@ -58,9 +58,8 @@ public class BenchmarkRepository(ICardRepository cardRepository) : IBenchmarkRep
     public async Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsParallelAsync(int amount, CancellationToken ct)
     {
         ConcurrentBag<CardModel> cards = [];
-        
-        ParallelOptions options = new() { MaxDegreeOfParallelism = Environment.ProcessorCount, CancellationToken = ct };
 
+        ParallelOptions options = new() { MaxDegreeOfParallelism = Environment.ProcessorCount, CancellationToken = ct };
 
         await Parallel.ForAsync(0, amount, options, async (i, token) =>
         {
