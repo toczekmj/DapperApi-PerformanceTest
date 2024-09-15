@@ -1,5 +1,6 @@
 using CardApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Resultify.Enums;
 
 namespace CardApi.Controllers;
 
@@ -17,42 +18,33 @@ public class ProjectController : ControllerBase
     [HttpGet("{projectId}")]
     public async Task<IActionResult> GetProjectByIdAsync(string projectId, CancellationToken ct)
     {
-        if(!ModelState.IsValid)
-        {
-            return BadRequest();
-        }
+        if (!ModelState.IsValid) return BadRequest();
 
         var result = await _projectRepository.GetProjectWithCardsByIdAsync(projectId, ct);
-        return result.ResponseCategory is not Resultify.Enums.ResponseCategory.Success 
-            ? StatusCode((int)result.StatusCode!, result.ErrorMessage) 
+        return result.ResponseCategory is not ResponseCategory.Success
+            ? StatusCode((int)result.StatusCode!, result.ErrorMessage)
             : Ok(result);
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAllProjectsWithCardsAsync(CancellationToken ct)
     {
-        if(!ModelState.IsValid)
-        {
-            return BadRequest();
-        }
-        
+        if (!ModelState.IsValid) return BadRequest();
+
         var result = await _projectRepository.GetProjectsAsync(ct);
-        return result.ResponseCategory is not Resultify.Enums.ResponseCategory.Success 
-            ? StatusCode((int)result.StatusCode!, result.ErrorMessage) 
+        return result.ResponseCategory is not ResponseCategory.Success
+            ? StatusCode((int)result.StatusCode!, result.ErrorMessage)
             : Ok(result);
     }
-    
+
     [HttpGet("WithCards")]
     public async Task<IActionResult> GetAllProjectsAsync(CancellationToken ct)
     {
-        if(!ModelState.IsValid)
-        {
-            return BadRequest();
-        }
+        if (!ModelState.IsValid) return BadRequest();
 
         var result = await _projectRepository.GetProjectsWithCardsAsync(ct);
-        return result.ResponseCategory is not Resultify.Enums.ResponseCategory.Success 
-            ? StatusCode((int)result.StatusCode!, result.ErrorMessage) 
+        return result.ResponseCategory is not ResponseCategory.Success
+            ? StatusCode((int)result.StatusCode!, result.ErrorMessage)
             : Ok(result);
     }
 }

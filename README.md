@@ -1,24 +1,28 @@
 # DapperApi-PerformanceTest
-This repo is created in order to measure performance with different 
+
+This repo is created in order to measure performance with different
 approaches to querying independent things from database in loop.
 It's created because of pure curiosity.
 
-Project contains: 
--  SQLite database to simulate work with real DB
--  Dapper as an ORM
--  Some controllers and services to simulate being a real API
--  Benchmark class and controllers which are being measured
--  Poorly written timer based benchmark in order to measure execute time
+Project contains:
+
+- SQLite database to simulate work with real DB
+- Dapper as an ORM
+- Some controllers and services to simulate being a real API
+- Benchmark class and controllers which are being measured
+- Poorly written timer based benchmark in order to measure execute time
 
 Disclaimer: This is not a real world scenario, it's just a simple test to measure performance of different approaches.
 System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 
-### What is being measured? 
+### What is being measured?
+
 #### How much faster are other approaches compared to baseline
--  Baseline - simple query in loop
+
+- Baseline - simple query in loop
     - Every query is being executed and awaited in loop
     - This is the baseline for other tests
--  WhenAllAsync - query in loop with WhenAllAsync
+- WhenAllAsync - query in loop with WhenAllAsync
     - Every query is being added to list of tasks and awaited with WhenAllAsync
 - Parallel - query in loop with Parallel.ForEach
     - Every query is being executed in Parallel.ForEach
@@ -26,11 +30,13 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
     - Every query is being executed in Parallel.ForEach with async
 
 ### Worth noting
+
 - I do set parallelism degree to Environment.ProcessorCount
 - Parallel variants are using ConcurrentBag to store results
 - Baseline and WhenAllAsync are using List to store tasks
 
 ## Results
+
 ### Single run results (how much faster compared to baseline)
 
 | Items          | WhenAllAsync     | Parallel | ParallelAsync |
@@ -42,7 +48,7 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 | **10,000,000** | -28.77% (slower) | 45.91%   | 38.01%        |
 
 ## Overall Percentage Improvements
-  
+
 | Test Case         | Improvement      |
 |-------------------|------------------|
 | **WhenAllAsync**  | -26.32% (slower) |
@@ -50,6 +56,7 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 | **ParallelAsync** | 40.76%           |
 
 ### Average of 10 cycles per test:
+
 ## Naive Benchmark Results (1k, 2k, 5k, 7k, 10k, 20k, 50k, 70k, 100k, 200k, 500k, 700k, 1M, 2M, 3M, 5M, 7M, 8M, 10M, 15M, Average)
 
 | Items    | AwaitedAsync (ms) | WhenAllAsync (ms) | Parallel (ms) | ParallelAsync (ms) | Speedup WhenAllAsync | Speedup Parallel | Speedup ParallelAsync |
@@ -80,27 +87,37 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 
 ![speedup_log_scale](https://github.com/user-attachments/assets/4d8a1c69-95ad-4338-952b-86761194158f)
 
-
 ## Summary of Results
 
-The table compares the execution times (in milliseconds) for different asynchronous approaches—**AwaitedAsync**, **WhenAllAsync**, **Parallel**, and **ParallelAsync**—across a range of item counts (from 1,000 to 15,000,000). It also includes the speedup for **WhenAllAsync**, **Parallel**, and **ParallelAsync** compared to **AwaitedAsync**.
+The table compares the execution times (in milliseconds) for different asynchronous approaches—**AwaitedAsync**, *
+*WhenAllAsync**, **Parallel**, and **ParallelAsync**—across a range of item counts (from 1,000 to 15,000,000). It also
+includes the speedup for **WhenAllAsync**, **Parallel**, and **ParallelAsync** compared to **AwaitedAsync**.
 
 ### Key Observations
 
 1. **Overall Execution Times**:
-    - **AwaitedAsync** has the highest execution time across all item counts, with times growing significantly as the item count increases. For example, processing 10,000,000 items takes **122,523 ms**.
-    - **WhenAllAsync** follows closely behind AwaitedAsync, with almost similar times, and rarely exceeds it by more than a small margin (e.g., 0.99x at 10,000,000 items).
-    - **Parallel** consistently shows a much lower execution time compared to AwaitedAsync and WhenAllAsync. For instance, at 1,000 items, it takes just **6 ms** vs. **36 ms** (AwaitedAsync).
+    - **AwaitedAsync** has the highest execution time across all item counts, with times growing significantly as the
+      item count increases. For example, processing 10,000,000 items takes **122,523 ms**.
+    - **WhenAllAsync** follows closely behind AwaitedAsync, with almost similar times, and rarely exceeds it by more
+      than a small margin (e.g., 0.99x at 10,000,000 items).
+    - **Parallel** consistently shows a much lower execution time compared to AwaitedAsync and WhenAllAsync. For
+      instance, at 1,000 items, it takes just **6 ms** vs. **36 ms** (AwaitedAsync).
     - **ParallelAsync** is close to the performance of Parallel, with very similar execution times.
 
 2. **Speedup Trends**:
-    - **WhenAllAsync** offers a minor speedup, typically between **0.98x and 2.00x**, but as the item count increases, the speedup reduces (dropping to around **1.00x** on average).
-    - **Parallel** consistently shows the best speedup, with values ranging from **6.00x** at lower item counts (1,000) to around **2.50x** at higher counts (7,000,000+).
-    - **ParallelAsync** also provides significant speedup, similar to Parallel. For instance, with 1,000 items, it achieves a **6.00x** speedup, but this diminishes to **2.40x** at 10,000,000 items.
+    - **WhenAllAsync** offers a minor speedup, typically between **0.98x and 2.00x**, but as the item count increases,
+      the speedup reduces (dropping to around **1.00x** on average).
+    - **Parallel** consistently shows the best speedup, with values ranging from **6.00x** at lower item counts (1,000)
+      to around **2.50x** at higher counts (7,000,000+).
+    - **ParallelAsync** also provides significant speedup, similar to Parallel. For instance, with 1,000 items, it
+      achieves a **6.00x** speedup, but this diminishes to **2.40x** at 10,000,000 items.
 
 3. **Scalability**:
-    - For smaller datasets (e.g., 1,000–10,000 items), **Parallel** and **ParallelAsync** provide much higher performance gains compared to AwaitedAsync.
-    - For larger datasets (1,000,000+ items), the speedup becomes more moderate across all methods. The performance gap between Parallel and AwaitedAsync narrows with the item count increase, though Parallel and ParallelAsync still offer better scalability.
+    - For smaller datasets (e.g., 1,000–10,000 items), **Parallel** and **ParallelAsync** provide much higher
+      performance gains compared to AwaitedAsync.
+    - For larger datasets (1,000,000+ items), the speedup becomes more moderate across all methods. The performance gap
+      between Parallel and AwaitedAsync narrows with the item count increase, though Parallel and ParallelAsync still
+      offer better scalability.
 
 ### Average Performance
 
@@ -117,12 +134,14 @@ The table compares the execution times (in milliseconds) for different asynchron
 
 ### Conclusion
 
-In summary, **Parallel** and **ParallelAsync** provide substantial speedups, especially for smaller to mid-range datasets, while **WhenAllAsync** offers only marginal improvements over AwaitedAsync. As the dataset size increases, the speedup advantage of Parallel approaches diminishes but still remains significant compared to AwaitedAsync.
-
-
+In summary, **Parallel** and **ParallelAsync** provide substantial speedups, especially for smaller to mid-range
+datasets, while **WhenAllAsync** offers only marginal improvements over AwaitedAsync. As the dataset size increases, the
+speedup advantage of Parallel approaches diminishes but still remains significant compared to AwaitedAsync.
 
 Are those results trustworthy? Maybe, or maybe not. But I'd take them into consideration while working with real data.
 Also keep in mind that:
-- MacBook Air M1 doesn't have active cooling, and OS might have dropped the CPU clock leading to worse performance during the end of testing phase 
-- M1 is an ARM CPU which has only 8 logical cores and no multi threading 
+
+- MacBook Air M1 doesn't have active cooling, and OS might have dropped the CPU clock leading to worse performance
+  during the end of testing phase
+- M1 is an ARM CPU which has only 8 logical cores and no multi threading
 - I am not certainly sure how MacOs handles concurrency and parallelism compared to other x64 Linux/Windows PCs

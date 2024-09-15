@@ -4,11 +4,13 @@ using CardApi.Models;
 using CardApi.Services;
 using Resultify.Handlers;
 using static Resultify.Resultify;
+
 namespace CardApi.Benchmarks;
 
 public class BenchmarkRepository(ICardRepository cardRepository) : IBenchmarkRepository
 {
-    public async Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsAwaitedAsync(int amount, CancellationToken ct)
+    public async Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsAwaitedAsync(int amount,
+        CancellationToken ct)
     {
         List<CardModel> cards = [];
         for (var i = 0; i < amount; i++)
@@ -21,7 +23,8 @@ public class BenchmarkRepository(ICardRepository cardRepository) : IBenchmarkRep
         return Success<IReadOnlyCollection<CardModel>>(cards, HttpStatusCode.OK);
     }
 
-    public async Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsWhenAllAsync(int amount, CancellationToken ct)
+    public async Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsWhenAllAsync(int amount,
+        CancellationToken ct)
     {
         List<CardModel> cards = [];
         var tasks = new List<Task<ResultifyHandler<CardModel>>>();
@@ -32,15 +35,15 @@ public class BenchmarkRepository(ICardRepository cardRepository) : IBenchmarkRep
         }
 
         await Task.WhenAll(tasks);
-        
+
         cards.AddRange(tasks.Select(x => x.Result.Value!));
         return Success<IReadOnlyCollection<CardModel>>(cards, HttpStatusCode.OK);
     }
-    
+
     public ResultifyHandler<IReadOnlyCollection<CardModel>> BenchmarkCardsParallel(int amount, CancellationToken ct)
     {
         ConcurrentBag<CardModel> cards = [];
-        
+
         ParallelOptions options = new() { MaxDegreeOfParallelism = Environment.ProcessorCount, CancellationToken = ct };
 
         Parallel.For(0, amount, options, Body);
@@ -55,7 +58,8 @@ public class BenchmarkRepository(ICardRepository cardRepository) : IBenchmarkRep
     }
 
 
-    public async Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsParallelAsync(int amount, CancellationToken ct)
+    public async Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsParallelAsync(int amount,
+        CancellationToken ct)
     {
         ConcurrentBag<CardModel> cards = [];
 
@@ -71,11 +75,12 @@ public class BenchmarkRepository(ICardRepository cardRepository) : IBenchmarkRep
     }
 }
 
-
 public interface IBenchmarkRepository
 {
     ResultifyHandler<IReadOnlyCollection<CardModel>> BenchmarkCardsParallel(int amount, CancellationToken ct);
     Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsAwaitedAsync(int amount, CancellationToken ct);
     Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsWhenAllAsync(int amount, CancellationToken ct);
-    Task<ResultifyHandler<IReadOnlyCollection<CardModel>>> BenchmarkCardsParallelAsync(int amount, CancellationToken ct);
+
+    Task<ResultifyHandler<IReadOnlyCollection<CardModel>>>
+        BenchmarkCardsParallelAsync(int amount, CancellationToken ct);
 }

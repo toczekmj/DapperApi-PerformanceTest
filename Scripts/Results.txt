@@ -1,0 +1,108 @@
+Benchmarking 1000 items
+BenchmarkCardsAwaitedAsync mean: 36ms
+BenchmarkCardsWhenAllAsync mean: 18ms
+BenchmarkCardsParallel mean: 6ms
+BenchmarkCardsParallelAsync mean: 6ms
+
+Benchmarking 2000 items
+BenchmarkCardsAwaitedAsync mean: 35ms
+BenchmarkCardsWhenAllAsync mean: 32ms
+BenchmarkCardsParallel mean: 10ms
+BenchmarkCardsParallelAsync mean: 11ms
+
+Benchmarking 5000 items
+BenchmarkCardsAwaitedAsync mean: 74ms
+BenchmarkCardsWhenAllAsync mean: 69ms
+BenchmarkCardsParallel mean: 24ms
+BenchmarkCardsParallelAsync mean: 25ms
+
+Benchmarking 7000 items
+BenchmarkCardsAwaitedAsync mean: 80ms
+BenchmarkCardsWhenAllAsync mean: 74ms
+BenchmarkCardsParallel mean: 25ms
+BenchmarkCardsParallelAsync mean: 27ms
+
+Benchmarking 10000 items
+BenchmarkCardsAwaitedAsync mean: 113ms
+BenchmarkCardsWhenAllAsync mean: 105ms
+BenchmarkCardsParallel mean: 34ms
+BenchmarkCardsParallelAsync mean: 39ms
+
+Benchmarking 20000 items
+BenchmarkCardsAwaitedAsync mean: 213ms
+BenchmarkCardsWhenAllAsync mean: 212ms
+BenchmarkCardsParallel mean: 102ms
+BenchmarkCardsParallelAsync mean: 70ms
+
+Benchmarking 50000 items
+BenchmarkCardsAwaitedAsync mean: 574ms
+BenchmarkCardsWhenAllAsync mean: 576ms
+BenchmarkCardsParallel mean: 183ms
+BenchmarkCardsParallelAsync mean: 175ms
+
+Benchmarking 70000 items
+BenchmarkCardsAwaitedAsync mean: 759ms
+BenchmarkCardsWhenAllAsync mean: 776ms
+BenchmarkCardsParallel mean: 255ms
+BenchmarkCardsParallelAsync mean: 249ms
+
+Benchmarking 100000 items
+BenchmarkCardsAwaitedAsync mean: 1050ms
+BenchmarkCardsWhenAllAsync mean: 1098ms
+BenchmarkCardsParallel mean: 430ms
+BenchmarkCardsParallelAsync mean: 375ms
+
+Benchmarking 200000 items
+BenchmarkCardsAwaitedAsync mean: 2261ms
+BenchmarkCardsWhenAllAsync mean: 2193ms
+BenchmarkCardsParallel mean: 810ms
+BenchmarkCardsParallelAsync mean: 851ms
+
+Benchmarking 500000 items
+BenchmarkCardsAwaitedAsync mean: 5405ms
+BenchmarkCardsWhenAllAsync mean: 5537ms
+BenchmarkCardsParallel mean: 2047ms
+BenchmarkCardsParallelAsync mean: 2070ms
+
+Benchmarking 700000 items
+BenchmarkCardsAwaitedAsync mean: 7644ms
+BenchmarkCardsWhenAllAsync mean: 7790ms
+BenchmarkCardsParallel mean: 2888ms
+BenchmarkCardsParallelAsync mean: 2951ms
+
+Benchmarking 1000000 items
+BenchmarkCardsAwaitedAsync mean: 11081ms
+BenchmarkCardsWhenAllAsync mean: 11157ms
+BenchmarkCardsParallel mean: 4249ms
+BenchmarkCardsParallelAsync mean: 4309ms
+
+
+Benchmarking 2000000 items
+BenchmarkCardsAwaitedAsync mean: 24283ms
+BenchmarkCardsWhenAllAsync mean: 24026ms
+BenchmarkCardsParallel mean: 10538ms
+BenchmarkCardsParallelAsync mean: 10360ms
+
+Benchmarking 3000000 items
+BenchmarkCardsAwaitedAsync mean: 34157ms
+BenchmarkCardsWhenAllAsync mean: 33944ms
+BenchmarkCardsParallel mean: 13312ms
+BenchmarkCardsParallelAsync mean: 13484ms
+
+Benchmarking 5000000 items
+BenchmarkCardsAwaitedAsync mean: 56654ms
+BenchmarkCardsWhenAllAsync mean: 56695ms
+BenchmarkCardsParallel mean: 22102ms
+BenchmarkCardsParallelAsync mean: 23006ms
+
+Benchmarking 7000000 items
+BenchmarkCardsAwaitedAsync mean: 80681ms
+BenchmarkCardsWhenAllAsync mean: 81327ms
+BenchmarkCardsParallel mean: 32275ms
+BenchmarkCardsParallelAsync mean: 33121ms
+
+Benchmarking 15000000 items
+BenchmarkCardsAwaitedAsync mean: 184176ms
+BenchmarkCardsWhenAllAsync mean: 184381ms
+BenchmarkCardsParallel mean: 81421ms
+BenchmarkCardsParallelAsync mean: 81576ms
