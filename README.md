@@ -50,7 +50,7 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 | **ParallelAsync** | 40.76%           |
 
 ### Average of 10 cycles per test:
-## Naive Benchmark Results (1k, 10k, 100k, 1M, 10M, Average)
+## Naive Benchmark Results (1k, 2k, 5k, 7k, 10k, 20k, 50k, 70k, 100k, 200k, 500k, 700k, 1M, 2M, 3M, 5M, 7M, 8M, 10M, 15M, Average)
 
 | Items    | AwaitedAsync (ms) | WhenAllAsync (ms) | Parallel (ms) | ParallelAsync (ms) | Speedup WhenAllAsync | Speedup Parallel | Speedup ParallelAsync |
 |----------|-------------------|-------------------|---------------|--------------------|----------------------|------------------|-----------------------|
@@ -74,7 +74,11 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 | 8000000  | 96592             | 96553             | 40016         | 40109              | 1.00x                | 2.41x            | 2.41x                 |
 | 10000000 | 122523            | 123147            | 50607         | 51118              | 0.99x                | 2.42x            | 2.40x                 |
 | 15000000 | 184176            | 184381            | 81421         | 81576              | 1.00x                | 2.26x            | 2.26x                 |
-| mean     | 31419             | 31485             | 13066         | 13196              | 1.00x                | 2.40x            | 2.38x                 |
+| Average  | 31419             | 31485             | 13066         | 13196              | 1.00x                | 2.40x            | 2.38x                 |
+
+![execution_times_log_scale](https://github.com/user-attachments/assets/72b11214-ba28-4b30-b4a0-17b9bbc2949a)
+
+![speedup_log_scale](https://github.com/user-attachments/assets/4d8a1c69-95ad-4338-952b-86761194158f)
 
 
 ## Summary of Results
