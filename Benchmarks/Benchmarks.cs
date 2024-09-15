@@ -40,8 +40,10 @@ public class BenchmarkRepository(ICardRepository cardRepository) : IBenchmarkRep
     public ResultifyHandler<IReadOnlyCollection<CardModel>> BenchmarkCardsParallel(int amount, CancellationToken ct)
     {
         ConcurrentBag<CardModel> cards = [];
+        
+        ParallelOptions options = new() { MaxDegreeOfParallelism = Environment.ProcessorCount, CancellationToken = ct };
 
-        Parallel.For(0, amount, Body);
+        Parallel.For(0, amount, options, Body);
 
         return Success<IReadOnlyCollection<CardModel>>(cards, HttpStatusCode.OK);
 
@@ -57,7 +59,9 @@ public class BenchmarkRepository(ICardRepository cardRepository) : IBenchmarkRep
     {
         ConcurrentBag<CardModel> cards = [];
 
-        await Parallel.ForAsync(0, amount, ct, async (i, token) =>
+        ParallelOptions options = new() { MaxDegreeOfParallelism = Environment.ProcessorCount, CancellationToken = ct };
+
+        await Parallel.ForAsync(0, amount, options, async (i, token) =>
         {
             var card = await cardRepository.GetCardAsync((i % 30).ToString(), token);
             if (!AnyFail(card)) cards.Add(card.Value!);

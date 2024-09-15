@@ -52,34 +52,68 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 ### Average of 10 cycles per test:
 ## Naive Benchmark Results (1k, 10k, 100k, 1M, 10M, Average)
 
-| Test Case                       | 1k   | 10k   | 100k   | 1M      | 10M      | Average   |
-|---------------------------------|------|-------|--------|---------|----------|-----------|
-| **BenchmarkCardsAwaitedAsync**  | 22ms | 112ms | 1250ms | 16435ms | 149898ms | 33543.4ms |
-| **BenchmarkCardsWhenAllAsync**  | 48ms | 110ms | 1252ms | 17508ms | 148991ms | 33581.8ms |
-| **BenchmarkCardsParallel**      | 8ms  | 56ms  | 668ms  | 9373ms  | 68367ms  | 15694.4ms |
-| **BenchmarkCardsParallelAsync** | 4ms  | 39ms  | 480ms  | 8511ms  | 71174ms  | 16041.6ms |
+| Items    | AwaitedAsync (ms) | WhenAllAsync (ms) | Parallel (ms) | ParallelAsync (ms) | Speedup WhenAllAsync | Speedup Parallel | Speedup ParallelAsync |
+|----------|-------------------|-------------------|---------------|--------------------|----------------------|------------------|-----------------------|
+| 1000     | 36                | 18                | 6             | 6                  | 2.00x                | 6.00x            | 6.00x                 |
+| 2000     | 35                | 32                | 10            | 11                 | 1.09x                | 3.50x            | 3.18x                 |
+| 5000     | 74                | 69                | 24            | 25                 | 1.07x                | 3.08x            | 2.96x                 |
+| 7000     | 80                | 74                | 25            | 27                 | 1.08x                | 3.20x            | 2.96x                 |
+| 10000    | 113               | 105               | 34            | 39                 | 1.08x                | 3.32x            | 2.90x                 |
+| 20000    | 213               | 212               | 102           | 70                 | 1.00x                | 2.09x            | 3.04x                 |
+| 50000    | 574               | 576               | 183           | 175                | 1.00x                | 3.14x            | 3.28x                 |
+| 70000    | 759               | 776               | 255           | 249                | 0.98x                | 2.98x            | 3.05x                 |
+| 100000   | 1050              | 1098              | 430           | 375                | 0.96x                | 2.44x            | 2.80x                 |
+| 200000   | 2261              | 2193              | 810           | 851                | 1.03x                | 2.79x            | 2.66x                 |
+| 500000   | 5405              | 5537              | 2047          | 2070               | 0.98x                | 2.64x            | 2.61x                 |
+| 700000   | 7644              | 7790              | 2888          | 2951               | 0.98x                | 2.65x            | 2.59x                 |
+| 1000000  | 11081             | 11157             | 4249          | 4309               | 0.99x                | 2.61x            | 2.57x                 |
+| 2000000  | 24283             | 24026             | 10538         | 10360              | 1.01x                | 2.30x            | 2.34x                 |
+| 3000000  | 34157             | 33944             | 13312         | 13484              | 1.01x                | 2.57x            | 2.53x                 |
+| 5000000  | 56654             | 56695             | 22102         | 23006              | 1.00x                | 2.56x            | 2.46x                 |
+| 7000000  | 80681             | 81327             | 32275         | 33121              | 0.99x                | 2.50x            | 2.44x                 |
+| 8000000  | 96592             | 96553             | 40016         | 40109              | 1.00x                | 2.41x            | 2.41x                 |
+| 10000000 | 122523            | 123147            | 50607         | 51118              | 0.99x                | 2.42x            | 2.40x                 |
+| 15000000 | 184176            | 184381            | 81421         | 81576              | 1.00x                | 2.26x            | 2.26x                 |
+| mean     | 31419             | 31485             | 13066         | 13196              | 1.00x                | 2.40x            | 2.38x                 |
 
 
-#### Average results:
-- BenchmarkCardsAwaitedAsync: 33543,4ms
-- BenchmarkCardsWhenAllAsync: 33581,8ms
-- BenchmarkCardsParallel: 15694,4ms
-- BenchmarkCardsParallelAsync: 16041,6ms
+## Summary of Results
 
-![benchmark_comparison](https://github.com/user-attachments/assets/785e0a63-1f0f-47ab-93c5-b6e19e66a01e)
+The table compares the execution times (in milliseconds) for different asynchronous approaches—**AwaitedAsync**, **WhenAllAsync**, **Parallel**, and **ParallelAsync**—across a range of item counts (from 1,000 to 15,000,000). It also includes the speedup for **WhenAllAsync**, **Parallel**, and **ParallelAsync** compared to **AwaitedAsync**.
 
+### Key Observations
 
-## Conclusion
-| Benchmark                   | Performance Difference from Baseline |
-|-----------------------------|--------------------------------------|
-| BenchmarkCardsWhenAllAsync  | 0.11% slower                         |
-| BenchmarkCardsParallel      | 53.21% faster                        |
-| BenchmarkCardsParallelAsync | 52.18% faster                        |
+1. **Overall Execution Times**:
+    - **AwaitedAsync** has the highest execution time across all item counts, with times growing significantly as the item count increases. For example, processing 10,000,000 items takes **122,523 ms**.
+    - **WhenAllAsync** follows closely behind AwaitedAsync, with almost similar times, and rarely exceeds it by more than a small margin (e.g., 0.99x at 10,000,000 items).
+    - **Parallel** consistently shows a much lower execution time compared to AwaitedAsync and WhenAllAsync. For instance, at 1,000 items, it takes just **6 ms** vs. **36 ms** (AwaitedAsync).
+    - **ParallelAsync** is close to the performance of Parallel, with very similar execution times.
 
+2. **Speedup Trends**:
+    - **WhenAllAsync** offers a minor speedup, typically between **0.98x and 2.00x**, but as the item count increases, the speedup reduces (dropping to around **1.00x** on average).
+    - **Parallel** consistently shows the best speedup, with values ranging from **6.00x** at lower item counts (1,000) to around **2.50x** at higher counts (7,000,000+).
+    - **ParallelAsync** also provides significant speedup, similar to Parallel. For instance, with 1,000 items, it achieves a **6.00x** speedup, but this diminishes to **2.40x** at 10,000,000 items.
 
-- BenchmarkCardsWhenAllAsync is 0.11% slower than the baseline (BenchmarkCardsAwaitedAsync).
-- BenchmarkCardsParallel is 53.21% faster than the baseline.
-- BenchmarkCardsParallelAsync is 52.18% faster than the baseline
+3. **Scalability**:
+    - For smaller datasets (e.g., 1,000–10,000 items), **Parallel** and **ParallelAsync** provide much higher performance gains compared to AwaitedAsync.
+    - For larger datasets (1,000,000+ items), the speedup becomes more moderate across all methods. The performance gap between Parallel and AwaitedAsync narrows with the item count increase, though Parallel and ParallelAsync still offer better scalability.
+
+### Average Performance
+
+- **Mean execution times** across all item counts:
+    - **AwaitedAsync**: 31,419 ms
+    - **WhenAllAsync**: 31,485 ms
+    - **Parallel**: 13,066 ms
+    - **ParallelAsync**: 13,196 ms
+
+- **Average speedup**:
+    - **WhenAllAsync**: 1.00x
+    - **Parallel**: 2.40x
+    - **ParallelAsync**: 2.38x
+
+### Conclusion
+
+In summary, **Parallel** and **ParallelAsync** provide substantial speedups, especially for smaller to mid-range datasets, while **WhenAllAsync** offers only marginal improvements over AwaitedAsync. As the dataset size increases, the speedup advantage of Parallel approaches diminishes but still remains significant compared to AwaitedAsync.
 
 
 
