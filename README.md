@@ -31,7 +31,7 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 - WhenAllAsync is using List to store tasks
 
 ## Results
-### Single run results (time of execution compared to baseline, in %)
+### Single run results (how much faster compared to baseline)
 
 | Items          | WhenAllAsync     | Parallel | ParallelAsync |
 |----------------|------------------|----------|---------------|
