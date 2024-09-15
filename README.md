@@ -79,6 +79,9 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 - BenchmarkCardsParallel: 15694,4ms
 - BenchmarkCardsParallelAsync: 16041,6ms
 
+![benchmark_comparison](https://github.com/user-attachments/assets/785e0a63-1f0f-47ab-93c5-b6e19e66a01e)
+
+
 ## Conclusion
 | Benchmark                   | Performance Difference from Baseline |
 |-----------------------------|--------------------------------------|
