@@ -26,12 +26,12 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
     - Every query is being executed in Parallel.ForEach with async
 
 ### Worth noting
-- I don't set any parallelization options in Parallel.ForEach
+- I do set parallelism degree to Environment.ProcessorCount
 - Parallel variants are using ConcurrentBag to store results
-- WhenAllAsync is using List to store tasks
+- Baseline and WhenAllAsync are using List to store tasks
 
 ## Results
-### Single run results:
+### Single run results (how much faster compared to baseline)
 
 | Items          | WhenAllAsync     | Parallel | ParallelAsync |
 |----------------|------------------|----------|---------------|
@@ -118,4 +118,7 @@ In summary, **Parallel** and **ParallelAsync** provide substantial speedups, esp
 
 
 Are those results trustworthy? Maybe, or maybe not. But I'd take them into consideration while working with real data.
-
+Also keep in mind that:
+- MacBook Air M1 doesn't have active cooling, and OS might have dropped the CPU clock leading to worse performance during the end of testing phase 
+- M1 is an ARM CPU which has only 8 logical cores and no multi threading 
+- I am not certainly sure how MacOs handles concurrency and parallelism compared to other x64 Linux/Windows PCs
