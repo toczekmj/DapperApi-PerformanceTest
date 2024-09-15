@@ -4,8 +4,11 @@ namespace CardApi.Benchmarks;
 
 public class Program
 {
+    private static int port = 5001;
     public static async Task Main()
     {
+        Console.WriteLine("Enter the port number of the API:");
+        port = int.Parse(Console.ReadLine());
         Console.WriteLine("Press any key to begin benchmarking...");
         Console.ReadKey();
         
@@ -47,7 +50,7 @@ public class Program
         var client = new HttpClient();
         client.Timeout = TimeSpan.FromMinutes(60);
         var stopwatch = new Stopwatch();
-        var baseUrl = "https://localhost:7038";
+        var baseUrl = "http://localhost:" + port;
         var benchmarkCardsAwaitedAsync = baseUrl + "/Benchmark/BenchmarkCardsAwaitedAsync/" + amount;
         var benchmarkCardsWhenAllAsync = baseUrl + "/Benchmark/BenchmarkCardsWhenAllAsync/" + amount;
         var benchmarkCardsParallel = baseUrl + "/Benchmark/BenchmarkCardsParallel/" + amount;

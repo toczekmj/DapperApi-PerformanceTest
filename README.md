@@ -26,9 +26,9 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
     - Every query is being executed in Parallel.ForEach with async
 
 ### Worth noting
-- I don't set any parallelization options in Parallel.ForEach
+- I do set parallelism degree to Environment.ProcessorCount
 - Parallel variants are using ConcurrentBag to store results
-- WhenAllAsync is using List to store tasks
+- Baseline and WhenAllAsync are using List to store tasks
 
 ## Results
 ### Single run results (how much faster compared to baseline)
