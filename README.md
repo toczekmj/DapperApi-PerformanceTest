@@ -1,5 +1,21 @@
 # DapperApi-PerformanceTest
 
+- [Introduction](#introduction)
+- [What is being measured?](#what-is-being-measured)
+  - [Baseline - simple query in loop](#baseline---simple-query-in-loop)
+  - [WhenAllAsync - query in loop with WhenAllAsync](#whenallasync---query-in-loop-with-whenallasync)
+  - [Parallel - query in loop with Parallel.ForEach](#parallel---query-in-loop-with-paralleleach)
+  - [ParallelAsync - query in loop with Parallel.ForEach and async](#parallelasync---query-in-loop-with-paralleleach-and-async)
+- [Worth noting](#worth-noting)
+- [Results](#results)
+  - [Single run results (how much faster compared to baseline)](#single-run-results-how-much-faster-compared-to-baseline)
+  - [Overall Percentage Improvements](#overall-percentage-improvements)
+  - [Naive Benchmark Results (1k, 2k, 5k, 7k, 10k, 20k, 50k, 70k, 100k, 200k, 500k, 700k, 1M, 2M, 3M, 5M, 7M, 8M, 10M, 15M, Average)](#naive-benchmark-results-1k-2k-5k-7k-10k-20k-50k-70k-100k-200k-500k-700k-1m-2m-3m-5m-7m-8m-10m-15m-average)
+- [Summary of Results](#summary-of-results)
+  - [Key Observations](#key-observations)
+  - [Average Performance](#average-performance)
+  - [Conclusion](#conclusion)
+
 This repo is created in order to measure performance with different
 approaches to querying independent things from database in loop.
 It's created because of pure curiosity.
