@@ -32,35 +32,22 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 
 ## Results
 ### Single run results:
-#### 1000 items:
-- WhenAllAsync: 86.67%
-- Parallel: 92.78%
-- ParallelAsync: 90.56%
 
-#### 10000 items:
-- WhenAllAsync: 11.63%
-- Parallel: 77.21%
-- ParallelAsync: 79.07%
+| Items          | WhenAllAsync     | Parallel | ParallelAsync |
+|----------------|------------------|----------|---------------|
+| **1000**       | 86.67%           | 92.78%   | 90.56%        |
+| **10,000**     | 11.63%           | 77.21%   | 79.07%        |
+| **100,000**    | 7.09%            | 73.04%   | 62.98%        |
+| **1,000,000**  | -6.16% (slower)  | 62.33%   | 66.41%        |
+| **10,000,000** | -28.77% (slower) | 45.91%   | 38.01%        |
 
-#### 100,000 items:
-- WhenAllAsync: 7.09%
-- Parallel: 73.04%
-- ParallelAsync: 62.98%
-
-#### 1,000,000 items:
-- WhenAllAsync: -6.16% (slower than baseline)
-- Parallel: 62.33%
-- ParallelAsync: 66.41%
-
-#### 10,000,000 items:
-- WhenAllAsync: -28.77% (slower than baseline)
-- Parallel: 45.91%
-- ParallelAsync: 38.01%
-
-#### Overall Percentage Improvements (for all sets combined):
-- WhenAllAsync: -26.32% (slower than baseline)
-- Parallel: 47.65%
-- ParallelAsync: 40.76%
+## Overall Percentage Improvements
+  
+| Test Case         | Improvement      |
+|-------------------|------------------|
+| **WhenAllAsync**  | -26.32% (slower) |
+| **Parallel**      | 47.65%           |
+| **ParallelAsync** | 40.76%           |
 
 ### Average of 10 cycles per test:
 ## Naive Benchmark Results (1k, 10k, 100k, 1M, 10M, Average)
@@ -78,6 +65,9 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 - BenchmarkCardsWhenAllAsync: 33581,8ms
 - BenchmarkCardsParallel: 15694,4ms
 - BenchmarkCardsParallelAsync: 16041,6ms
+
+![benchmark_comparison](https://github.com/user-attachments/assets/785e0a63-1f0f-47ab-93c5-b6e19e66a01e)
+
 
 ## Conclusion
 | Benchmark                   | Performance Difference from Baseline |
