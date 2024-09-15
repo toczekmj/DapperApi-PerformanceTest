@@ -2,10 +2,10 @@
 
 - [Introduction](#introduction)
 - [What is being measured?](#what-is-being-measured)
-  - [Baseline - simple query in loop](#baseline---simple-query-in-loop)
-  - [WhenAllAsync - query in loop with WhenAllAsync](#whenallasync---query-in-loop-with-whenallasync)
-  - [Parallel - query in loop with Parallel.ForEach](#parallel---query-in-loop-with-paralleleach)
-  - [ParallelAsync - query in loop with Parallel.ForEach and async](#parallelasync---query-in-loop-with-paralleleach-and-async)
+  - Baseline - simple query in loop
+  - WhenAllAsync - query in loop with WhenAllAsync
+  - Parallel - query in loop with Parallel.ForEach
+  - ParallelAsync - query in loop with Parallel.ForEach and async
 - [Worth noting](#worth-noting)
 - [Results](#results)
   - [Single run results (how much faster compared to baseline)](#single-run-results-how-much-faster-compared-to-baseline)
