@@ -31,7 +31,7 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 - WhenAllAsync is using List to store tasks
 
 ## Results
-### Single run results:
+### Single run results (time of execution compared to baseline, in %)
 
 | Items          | WhenAllAsync     | Parallel | ParallelAsync |
 |----------------|------------------|----------|---------------|
@@ -84,4 +84,7 @@ System was tested on MacBook Air 2020 with M1 chip and 16GB of RAM.
 
 
 Are those results trustworthy? Maybe, or maybe not. But I'd take them into consideration while working with real data.
-
+Also take in mind that:
+- MacBook Air M1 doesn't have active cooling, and OS might have dropped the CPU clock leading to worse performance during the end of testing phase 
+- M1 is an ARM CPU which has only 8 logical cores and no multi threading 
+- I am not certainly sure how MacOs handles concurrency and parallelism compared to other x64 Linux/Windows PCs
