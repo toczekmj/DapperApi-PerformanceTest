@@ -159,5 +159,5 @@ Also keep in mind that:
 
 - MacBook Air M1 doesn't have active cooling, and OS might have dropped the CPU clock leading to worse performance
   during the end of testing phase
-- M1 is an ARM CPU which has only 8 logical cores and no multi threading
+- M1 is an ARM CPU which has only 8 logical cores and no hyper-threading
 - I am not certainly sure how MacOs handles concurrency and parallelism compared to other x64 Linux/Windows PCs
